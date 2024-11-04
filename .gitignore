@@ -1,2 +1,2 @@
-app\.venv\
-app\__pycache__\
+/app/.venv/
+/app/__pycache__/
