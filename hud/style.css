@@ -43,8 +43,8 @@ body{
     position: absolute;
     top: 0;
     right: 0;
-    height: 125px;
-    width: 125px;
+    height: 100px;
+    width: 100px;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
