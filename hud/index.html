@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valorant Stream HUD</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
-<body>
+<body onload="updateSnapshot()">
     <div class="stream-heading">
         <div class="topLeft">
             <p>MATCH <span id="match-no">12</span>
@@ -19,76 +20,76 @@
     </div>
 
     <div class="teamA" id="attackers">
-        <div class="player">
+        <div class="player" id="p1">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
                 <div id="stats">
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                     <div id="weapon-creds">
                         <div id="weapon">
-                            <img src="../assets/guns/marshal.png">
+                            <img src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="lower">
                 <div id="name">thisismudith</div>
-                <div class="ult ready">
+                <div class="ult">
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>
                     <div id="ult-5" class="ult-point"></div>
                     <div id="ult-6" class="ult-point"></div>
                 </div>
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
             </div>
         </div>
-        <div class="player dead">
+        <div class="player" id="p2">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
                 <div id="stats">
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                     <div id="weapon-creds">
                         <div id="weapon">
-                            <img src="../assets/guns/vandal.png">
+                            <img src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                 </div>
@@ -99,51 +100,7 @@
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
-                    <div id="ult-2" class="ult-point"></div>
-                    <div id="ult-3" class="ult-point"></div>
-                    <div id="ult-4" class="ult-point"></div>
-                    <div id="ult-5" class="ult-point"></div>
-                    <div id="ult-6" class="ult-point"></div>
-                </div>
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
-            </div></div>
-        <div class="player">
-            <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
-            </div>
-            <div class="upper">
-                <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
-                <div id="stats">
-                    <div class="count">
-                        <div id="kills">20</div>
-                        <div>Kills</div>
-                    </div>
-                    <div class="count">
-                        <div id="deaths">1</div>
-                        <div>Deaths</div>
-                    </div>
-                    <div class="count">
-                        <div id="assists">7</div>
-                        <div>Assists</div>
-                    </div>
-                    <div id="weapon-creds">
-                        <div id="weapon">
-                            <img src="../assets/guns/vandal.png">
-                        </div>
-                        <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="lower">
-                <div id="name">thisismudith</div>
-                <div class="ult">
-                    <div class="ult-icon">
-                        <img src="../assets/ults/reyna.png">
-                    </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>
@@ -152,31 +109,31 @@
                 </div>
                 <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
             </div></div>
-        <div class="player">
+        <div class="player" id="p3">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
                 <div id="stats">
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                     <div id="weapon-creds">
                         <div id="weapon">
-                            <img class="secondary" src="../assets/guns/bulldog.png">
+                            <img src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                 </div>
@@ -187,40 +144,40 @@
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>
                     <div id="ult-5" class="ult-point"></div>
                     <div id="ult-6" class="ult-point"></div>
                 </div>
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_light.png"></div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
             </div></div>
-        <div class="player">
+        <div class="player" id="p4">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
                 <div id="stats">
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                     <div id="weapon-creds">
                         <div id="weapon">
-                            <img src="../assets/guns/phantom.png">
+                            <img class="secondary" src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                 </div>
@@ -231,111 +188,65 @@
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>
                     <div id="ult-5" class="ult-point"></div>
                     <div id="ult-6" class="ult-point"></div>
                 </div>
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_light.png"></div>
+            </div></div>
+        <div class="player" id="p5">
+            <div id="creds-grid-dead">
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
+            </div>
+            <div class="upper">
+                <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
+                <div id="stats">
+                    <div class="count">
+                        <div id="kills">0</div>
+                        <div>Kills</div>
+                    </div>
+                    <div class="count">
+                        <div id="deaths">0</div>
+                        <div>Deaths</div>
+                    </div>
+                    <div class="count">
+                        <div id="assists">0</div>
+                        <div>Assists</div>
+                    </div>
+                    <div id="weapon-creds">
+                        <div id="weapon">
+                            <img src="../assets/guns/classic.png">
+                        </div>
+                        <div id="creds-grid">
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lower">
+                <div id="name">thisismudith</div>
+                <div class="ult">
+                    <div class="ult-icon">
+                        <img src="../assets/ults/reyna.png">
+                    </div>
+                    <div id="ult-1" class="ult-point"></div>
+                    <div id="ult-2" class="ult-point"></div>
+                    <div id="ult-3" class="ult-point"></div>
+                    <div id="ult-4" class="ult-point"></div>
+                    <div id="ult-5" class="ult-point"></div>
+                    <div id="ult-6" class="ult-point"></div>
+                </div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
             </div></div>
     </div>
 
     <div class="teamB" id="defenders">
-        <div class="player">
+        <div class="player" id="p1">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
-            </div>
-            <div class="upper">
-                <div id="stats">
-                    <div id="weapon-creds">
-                        <div id="weapon">
-                            <img src="../assets/guns/operator.png">
-                        </div>
-                        <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
-                        </div>
-                    </div>
-                    <div class="count">
-                        <div id="kills">20</div>
-                        <div>Kills</div>
-                    </div>
-                    <div class="count">
-                        <div id="deaths">1</div>
-                        <div>Deaths</div>
-                    </div>
-                    <div class="count">
-                        <div id="assists">7</div>
-                        <div>Assists</div>
-                    </div>
-                </div>
-                <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
-            </div>
-            <div class="lower">
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
-                <div class="ult">
-                    <div class="ult-icon">
-                        <img src="../assets/ults/reyna.png">
-                    </div>
-                    <div id="ult-1" class="ult-point fill"></div>
-                    <div id="ult-2" class="ult-point"></div>
-                    <div id="ult-3" class="ult-point"></div>
-                    <div id="ult-4" class="ult-point"></div>
-                    <div id="ult-5" class="ult-point"></div>
-                    <div id="ult-6" class="ult-point"></div>
-                </div>
-                <div id="name">thisismudith</div>
-            </div>
-        </div>
-        <div class="player">
-            <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
-            </div>
-            <div class="upper">
-                <div id="stats">
-                    <div id="weapon-creds">
-                        <div id="weapon">
-                            <img src="../assets/guns/odin.png">
-                        </div>
-                        <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
-                        </div>
-                    </div>
-                    <div class="count">
-                        <div id="kills">20</div>
-                        <div>Kills</div>
-                    </div>
-                    <div class="count">
-                        <div id="deaths">1</div>
-                        <div>Deaths</div>
-                    </div>
-                    <div class="count">
-                        <div id="assists">7</div>
-                        <div>Assists</div>
-                    </div>
-                </div>
-                <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
-            </div>
-            <div class="lower">
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
-                <div class="ult ready">
-                    <div class="ult-icon">
-                        <img src="../assets/ults/reyna.png">
-                    </div>
-                    <div id="ult-1" class="ult-point fill"></div>
-                    <div id="ult-2" class="ult-point"></div>
-                    <div id="ult-3" class="ult-point"></div>
-                    <div id="ult-4" class="ult-point"></div>
-                    <div id="ult-5" class="ult-point"></div>
-                    <div id="ult-6" class="ult-point"></div>
-                </div>
-                <div id="name">thisismudith</div>
-            </div>
-        </div>
-        <div class="player">
-            <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="stats">
@@ -344,31 +255,31 @@
                             <img src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                 </div>
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
             </div>
             <div class="lower">
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
                 <div class="ult">
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>
@@ -378,42 +289,42 @@
                 <div id="name">thisismudith</div>
             </div>
         </div>
-        <div class="player">
+        <div class="player" id="p2">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="stats">
                     <div id="weapon-creds">
                         <div id="weapon">
-                            <img src="../assets/guns/vandal.png">
+                            <img src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                 </div>
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
             </div>
             <div class="lower">
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
                 <div class="ult">
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>
@@ -423,42 +334,132 @@
                 <div id="name">thisismudith</div>
             </div>
         </div>
-        <div class="player dead">
+        <div class="player" id="p3">
             <div id="creds-grid-dead">
-                <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
             </div>
             <div class="upper">
                 <div id="stats">
                     <div id="weapon-creds">
                         <div id="weapon">
-                            <img src="../assets/guns/vandal.png">
+                            <img src="../assets/guns/classic.png">
                         </div>
                         <div id="creds-grid">
-                            <img src="../assets/web/creds.png"> <span id="creds">9,000</span>
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
                         </div>
                     </div>
                     <div class="count">
-                        <div id="kills">20</div>
+                        <div id="kills">0</div>
                         <div>Kills</div>
                     </div>
                     <div class="count">
-                        <div id="deaths">1</div>
+                        <div id="deaths">0</div>
                         <div>Deaths</div>
                     </div>
                     <div class="count">
-                        <div id="assists">7</div>
+                        <div id="assists">0</div>
                         <div>Assists</div>
                     </div>
                 </div>
                 <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
             </div>
             <div class="lower">
-                <div id="health"><span style="font-weight: bold">100</span><img class="shield" src="../assets/web/green_heavy.png"></div>
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
                 <div class="ult">
                     <div class="ult-icon">
                         <img src="../assets/ults/reyna.png">
                     </div>
-                    <div id="ult-1" class="ult-point fill"></div>
+                    <div id="ult-1" class="ult-point"></div>
+                    <div id="ult-2" class="ult-point"></div>
+                    <div id="ult-3" class="ult-point"></div>
+                    <div id="ult-4" class="ult-point"></div>
+                    <div id="ult-5" class="ult-point"></div>
+                    <div id="ult-6" class="ult-point"></div>
+                </div>
+                <div id="name">thisismudith</div>
+            </div>
+        </div>
+        <div class="player" id="p4">
+            <div id="creds-grid-dead">
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
+            </div>
+            <div class="upper">
+                <div id="stats">
+                    <div id="weapon-creds">
+                        <div id="weapon">
+                            <img src="../assets/guns/classic.png">
+                        </div>
+                        <div id="creds-grid">
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
+                        </div>
+                    </div>
+                    <div class="count">
+                        <div id="kills">0</div>
+                        <div>Kills</div>
+                    </div>
+                    <div class="count">
+                        <div id="deaths">0</div>
+                        <div>Deaths</div>
+                    </div>
+                    <div class="count">
+                        <div id="assists">0</div>
+                        <div>Assists</div>
+                    </div>
+                </div>
+                <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
+            </div>
+            <div class="lower">
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
+                <div class="ult">
+                    <div class="ult-icon">
+                        <img src="../assets/ults/reyna.png">
+                    </div>
+                    <div id="ult-1" class="ult-point"></div>
+                    <div id="ult-2" class="ult-point"></div>
+                    <div id="ult-3" class="ult-point"></div>
+                    <div id="ult-4" class="ult-point"></div>
+                    <div id="ult-5" class="ult-point"></div>
+                    <div id="ult-6" class="ult-point"></div>
+                </div>
+                <div id="name">thisismudith</div>
+            </div>
+        </div>
+        <div class="player" id="p5">
+            <div id="creds-grid-dead">
+                <img src="../assets/web/creds.png"> <span class="creds">800</span>
+            </div>
+            <div class="upper">
+                <div id="stats">
+                    <div id="weapon-creds">
+                        <div id="weapon">
+                            <img src="../assets/guns/classic.png">
+                        </div>
+                        <div id="creds-grid">
+                            <img src="../assets/web/creds.png"> <span class="creds">800</span>
+                        </div>
+                    </div>
+                    <div class="count">
+                        <div id="kills">0</div>
+                        <div>Kills</div>
+                    </div>
+                    <div class="count">
+                        <div id="deaths">0</div>
+                        <div>Deaths</div>
+                    </div>
+                    <div class="count">
+                        <div id="assists">0</div>
+                        <div>Assists</div>
+                    </div>
+                </div>
+                <div id="agent"><img src="../assets/agents/reyna.png" alt=""></div>
+            </div>
+            <div class="lower">
+                <div id="health"><span style="font-weight: bold">100</span><img class="shield none" src="../assets/web/green_heavy.png"></div>
+                <div class="ult">
+                    <div class="ult-icon">
+                        <img src="../assets/ults/reyna.png">
+                    </div>
+                    <div id="ult-1" class="ult-point"></div>
                     <div id="ult-2" class="ult-point"></div>
                     <div id="ult-3" class="ult-point"></div>
                     <div id="ult-4" class="ult-point"></div>

@@ -1,0 +1,6 @@
+numpy==1.24.3
+fastapi[standard]==0.104.1
+fastapi-cli==0.0.5
+scikit-image==0.22.0
+pytesseract==0.3.13
+opencv-python==4.10.0.84
