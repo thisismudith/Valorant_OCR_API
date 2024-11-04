@@ -260,12 +260,12 @@ body{
 #creds-grid-dead{
     position: absolute;
     bottom: 2px;
-    right: 0;
+    right: 5px;
 }
 
 .teamB #creds-grid-dead{
     right: auto;
-    left: 0;
+    left: 5.5px;
 }
 
 #creds-grid, #creds-grid-dead{
