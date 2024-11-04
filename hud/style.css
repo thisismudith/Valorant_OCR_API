@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Kiwi+Maru&family=Patrick+Hand+SC&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@font-face{
+    font-family: "Drukwide";
+    src: url('../assets/web/drukwide/DrukWide-Medium-Trial.otf');
+}
+body{
+    background-image: url("https://i.ytimg.com/vi/Wrdh5HrOCMc/maxresdefault.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.stream-heading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.stream-heading .topLeft{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6));
+}
+
+.stream-heading .topLeft p{
+    text-align: left;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.stream-heading .topRight{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 125px;
+    width: 125px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.stream-heading .topRight img{
+    width: 100%;
+    height: 100%;
+    scale: 1.2;
+    object-fit: cover;
+}
+
+.teamA{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 250px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.teamB{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 250px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+.player{
+    position: relative;
+    width: 250px;
+    height: 66px;
+    display: grid;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    color: #eee;
+    overflow: hidden;
+}
+
+.player.dead, .player.dead .upper, .player.dead .lower{
+    width: 167px;
+}
+
+.teamB .player.dead{
+    margin-left: auto;
+}
+
+.teamB .player.dead #agent{
+    float: right;
+}
+.teamB .player.dead #name{
+    margin-right: 5px;
+    margin-left: auto;
+}
+
+.player.dead #agent img{
+    filter: grayscale(1);
+}
+
+
+.player.dead #stats, .player.dead .ult, .player.dead #health{
+    display: none;
+}
+
+.player.dead #creds-grid-dead{
+    display: flex;
+}
+.teamB .player.dead #agent{
+    margin-left: auto;
+}
+
+.teamA .player .upper{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6));
+}
+.teamB .player .upper{
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+}
+.player.dead .upper{
+    background-image: linear-gradient(to right, rgba(18,26,32,0.2), rgba(0, 0, 0, 0)) !important;
+}
+.teamB .player.dead .upper{
+    background-image: linear-gradient(to left, rgba(18,26,32,0.2), rgba(0, 0, 0, 0)) !important;
+}
+.player .upper{
+    width: 250px;
+    height: 44px;
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+}
+.player .lower{
+    width: 250px;
+    height: 22px;
+    padding: 0 5px;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+
+#attackers .player .lower{
+    border-top: 4px solid rgba(32, 244, 186, 1);
+    background-color: rgba(114, 157, 134, 0.7);
+}
+
+#defenders .player .lower{
+    border-top: 4px solid #FD4556;
+    background-color: rgba(255, 67, 83, 0.5);
+}
+
+.player.dead .lower{
+    border-top: 0px !important;
+    background-color: transparent !important;
+    background-image: linear-gradient(to right, rgba(18,26,32,1), rgba(18,26,32,0.4)) !important;
+}
+.teamB .player.dead .lower{
+    background-image: linear-gradient(to left, rgba(18,26,32,1), rgba(18,26,32,0.4)) !important;
+}
+
+.shield{
+    width: 15px;
+    height: 15px;
+}
+
+.shield.none{
+    opacity: 0;
+}
+
+#agent{
+    width: 56px;
+    height: 44px;
+    overflow: hidden;
+}
+
+#agent img{
+    margin-left: -2px;
+    margin-top: -6px;
+    width: 56px;
+    height: 56px;
+}
+
+
+.teamB #agent img{
+    transform: scale(-1, 1);
+}
+
+#stats{
+    display: flex;
+    column-gap: 10px;
+    width: 186px;
+    height: 44px;
+}
+
+.count{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.count div:last-child{
+    margin-top: auto;
+    font-weight: 300;
+    font-size: 8px;
+}
+
+#weapon-creds{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    width: 75px;
+    margin-right: 5px;
+    height: 44px;
+}
+
+.teamB #weapon-creds{
+    margin-left: 5px;
+    margin-right: auto;
+}
+
+#weapon{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-top: 5px;
+}
+.teamB #weapon{
+    margin-left: 0;
+    justify-content: right;
+}
+.teamA #weapon img{
+    transform: scale(-1, 1);
+}
+
+#weapon img{
+    max-width: 75px;
+    max-height: 22px;
+    width: auto;
+    height: auto;
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.teamB #weapon img{
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+#creds-grid-dead{
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+}
+
+.teamB #creds-grid-dead{
+    right: auto;
+    left: 0;
+}
+
+#creds-grid, #creds-grid-dead{
+    display: flex;
+    float: right;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2px;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 2px;
+    font-size: 10px;
+    width: fit-content;
+}
+
+.teamB #creds-grid, .teamB #creds-grid-dead{
+    margin-left: -.5px;
+    margin-right: auto;
+}
+
+#creds-grid img, #creds-grid-dead img{
+    width: 8px;
+    height: 8px;
+}
+
+#creds-grid-dead{
+    display: none;
+}
+
+#name{
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    margin-right: auto;
+    text-align: left;
+}
+
+.teamB #name{
+    margin-right: 5px;
+    margin-left: auto;
+}
+
+.ult{
+    display: flex;
+    column-gap: 6px;
+}
+
+.teamB .ult{
+    flex-direction: row-reverse;
+}
+
+.ult-point{
+    width: 6px;
+    height: 6px;
+    background-color: #303030;
+    rotate: 45deg;
+}
+
+.ult-point.fill{
+    background-color: #eee;
+}
+
+.ult.ready .ult-point{
+    display: none;
+}
+
+.ult-icon{
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    width: 30px;
+    height: 13.5px;
+    clip-path: polygon(
+        20% 0%, 80% 0%, 
+        100% 50%, 80% 100%, 
+        20% 100%, 0% 50%
+    );
+}
+
+.ult-icon img{
+    filter: invert(100%);
+    width: 12.5px;
+    height: 12.5px;
+}
+.ult.ready .ult-icon{
+    display: flex !important;
+}
+
+#health{
+    display: flex;
+    column-gap: 2px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.teamB #health{
+    flex-direction: row-reverse;
+}
