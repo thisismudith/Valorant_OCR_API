@@ -5,6 +5,33 @@ from math import floor
 from misc import CONFIG, compare_images, extract_numbers
 
 # Add trigger events
+ULT = {
+    "astra": 7,
+    "breach": 9,
+    "brimstone": 8,
+    "chamber": 8,
+    "clove": 8,
+    "cypher": 6,
+    "deadlock": 7,
+    "fade": 8,
+    "gekko": 8,
+    "harbor": 7,
+    "iso": 7,
+    "jett": 8,
+    "kayo": 8,
+    "killjoy": 9,
+    "neon": 7,
+    "omen": 7,
+    "phoenix": 6,
+    "raze": 8,
+    "reyna": 6,
+    "sage": 8,
+    "skye": 8,
+    "sova": 8,
+    "viper": 9,
+    "vyse": 8,
+    "yoru": 7
+}
 
 
 class Match():
@@ -35,6 +62,7 @@ class Match():
         self.scores = self.img[680:758, 763:1725]
 
         return True
+
 
     def get_player_by_name(self, i: int):
         """Gets the player name and updates the side"""
@@ -69,7 +97,7 @@ class Match():
         defense_agents = self.img[453:1241, 2364:2460]
 
         # Fill with nullset
-        self.players = [{} for i in range(10)]
+        self.players = [{} for _ in range(10)]
 
         for i in range(5):
             lower_limit = floor(187.5*i)
@@ -99,14 +127,18 @@ class Match():
         pass
 
 
-    def get_ultimate_status(self, side_attack: bool, lower_limit: int, upper_limit: int):
+    def get_ultimate_status(self, side_attack: bool, agent: str, lower_limit: int, upper_limit: int):
         """Returns the ultimate status of the player"""
         if side_attack:
-            return extract_numbers(self.attack[lower_limit:upper_limit, 370:435], True)
-            return pyt.image_to_string(self.attack[lower_limit:upper_limit, 370:435], config=CONFIG).strip()
+            res = extract_numbers(self.attack[lower_limit:upper_limit, 370:435], True)
+            if len(res) == 0:
+                res = [ULT[agent] for _ in range(2)]
+            return res
         else:
-            return extract_numbers(self.defense[lower_limit:upper_limit, 370:435], True)
-            return pyt.image_to_string(self.defense[lower_limit:upper_limit, 370:435], config=CONFIG).strip()
+            res = extract_numbers(self.defense[lower_limit:upper_limit, 370:435], True)
+            if len(res) == 0:
+                res = [ULT[agent] for _ in range(2)]
+            return res
 
 
     def get_kda(self, side_attack: bool, lower_limit: int, upper_limit: int):
@@ -181,18 +213,21 @@ class Match():
         self.updateDuringRound()
 
 
-    def updateDuringRound(self):
+    def updateDuringRound(self, firstTime: bool = False):
         """Update ultimate status, KDA and weapons (including death) during round"""
 
         # Fetch new image
         self.updateSnapshot()
 
         for i in range(10):
-
             # Attack side
             if i < 5:
                 lower_limit, upper_limit = 45*i, 45*(i+1)
                 player = self.get_player_by_name(i)
+
+                # Temp
+                agents = ["reyna", "omen", "gekko", "kayo", "phoenix"]
+                player["agent"] = agents[i]
 
                 # If player doesn't exist, skip... (avoid errors while streaming)
                 if player is None:
@@ -202,7 +237,7 @@ class Match():
                 player["position"] = i+1
 
                 # Ultimate status
-                player["ult"] = self.get_ultimate_status(True, lower_limit, upper_limit)
+                player["ult"] = self.get_ultimate_status(True, player["agent"], lower_limit, upper_limit)
 
                 # KDA
                 player["kda"] = self.get_kda(True, lower_limit, upper_limit)
@@ -216,10 +251,17 @@ class Match():
                 # Creds
                 player["creds"] = self.get_creds(True, lower_limit, upper_limit)
 
+                # First Time
+                player["firstTime"] = firstTime
+
             # Defense side
             else:
                 lower_limit, upper_limit = 45*(i-5), 45*(i-4)
                 player = self.get_player_by_name(i)
+
+                # Temp
+                agents = ["neon", "killjoy", "sage", "jett", "fade"]
+                player["agent"] = agents[i-5]
 
                 # If player doesn't exist, skip... (avoid errors while streaming)
                 if player is None:
@@ -229,7 +271,7 @@ class Match():
                 player["position"] = i-4
 
                 # Ultimate status
-                player["ult"] = self.get_ultimate_status(False, lower_limit, upper_limit)
+                player["ult"] = self.get_ultimate_status(False, player["agent"], lower_limit, upper_limit)
 
                 # KDA
                 player["kda"] = self.get_kda(False, lower_limit, upper_limit)
@@ -243,6 +285,9 @@ class Match():
                 # Creds
                 player["creds"] = self.get_creds(False, lower_limit, upper_limit)
 
+                # First Time
+                player["firstTime"] = firstTime
+
         return self.players
 
 
@@ -251,6 +296,3 @@ class Match():
 
         # This function currently calls updateDuringRound
         self.updateDuringRound()
-
-
-# SHORTY IMAGE LENA BACHA HAI

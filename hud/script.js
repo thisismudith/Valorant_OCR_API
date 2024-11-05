@@ -1,32 +1,6 @@
-function updateSnapshot(){
-    const loc = "C:/Users/dagam/Codes/Valorant_OCR_API/images/img1.png";
-
-    fetch(`http://127.0.0.1:8000/update-snapshot?loc=${loc}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      // body: JSON.stringify(data)  // Make sure the body is a JSON string
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error("Error:", error));
-}
-
-function getHUDData(firstTime=false){
-    fetch("http://127.0.0.1:8000/update-during-round", {
-        method: "GET",
-        headers: {
-        "Content-type": "application/json"
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        data.forEach((player, i) => {
-            mapPlayer(i+1, player, firstTime);
-        });
-    });
-}
+const URL = "127.0.0.1:8000", loc = "C:/Users/dagam/Codes/Valorant_OCR_API/images/img1.png";
+let socket = new WebSocket(`ws://${URL}/update-during-round`),
+firtTime = true;
 
 function mapPlayer(pos, player, firstTime=false){
   const maxUltPoints = player.ult[1],
@@ -61,7 +35,8 @@ function mapPlayer(pos, player, firstTime=false){
   // Update player name and agents (if first time)
   if (firstTime){
     playerHUD.querySelector("#name").textContent = player.name;
-    // playerHUD.querySelector("#agent img").src = `../assets/agents/${player.agent}.png`;
+    playerHUD.querySelector("#agent img").src = `../assets/agents/${player.agent}.png`;
+    playerHUD.querySelector(".ult-icon img").src = `../assets/ults/${player.agent}.png`;
     if (maxUltPoints > 6){
       for (let i = 7; i <= maxUltPoints; i++){
         playerHUD.querySelector(".ult").insertAdjacentHTML("beforeend", `<div id="ult-${i}" class="ult-point"></div>`);
@@ -113,8 +88,60 @@ function mapPlayer(pos, player, firstTime=false){
   }
 }
 
-// First Time
-setTimeout(getHUDData(true), 1000);
 
-// During Round
-setInterval(getHUDData, 1000);
+// Listen for message
+socket.onmessage = function(event) {
+  const data = JSON.parse(event.data);
+  console.log("Updated!");
+  data.forEach((player, i) => {
+      mapPlayer(i+1, player, player["firstTime"]);
+  });
+};
+
+function connect(socket){
+  socket.onopen = function(e) {
+    socket.send("start");
+  };
+
+  // Listen for message
+  socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log("Updated!");
+    data.forEach((player, i) => {
+        mapPlayer(i+1, player, player["firstTime"]);
+    });
+  };
+
+  // Handle WebSocket errors
+  socket.onerror = function(error) {
+    console.error("WebSocket error:", error);
+  };
+}
+
+// Start receiving updates
+function startUpdates() {
+  if (socket.readyState == 3) socket = new WebSocket(`ws://${URL}/update-during-round`);
+  else socket.send("start");
+  connect(socket);
+}
+
+// Stop receiving updates
+function stopUpdates() {
+  socket.send("stop");
+  socket.close();
+  console.log("Stopping!")
+}
+
+// POST request for update snapshot
+function updateSnapshot(){
+    fetch(`http://127.0.0.1:8000/update-snapshot?loc=${loc}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      // body: JSON.stringify(data)  // Make sure the body is a JSON string
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error("Error:", error));
+}

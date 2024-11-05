@@ -1,4 +1,6 @@
-
+from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+from typing import Optional
 import cv2
 import pytesseract as pyt
 from misc import CONFIG, extract_numbers
@@ -101,6 +103,22 @@ class Stats():
 
         return res
 
+
+app = FastAPI()
+stats = Stats()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],  # Remove any path from the URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Use ["*"] to allow all methods, or specify the needed methods
+    allow_headers=["*"],  # Use ["*"] to allow all headers, or specify the required headers
+)
+
+# End Game Stats
+@app.get("/match-stats")
+def match_stats(loc: Optional[str] = Query(None, description="The image location")):
+    return stats.get_match_stats(loc)
 
 # First Half - Defense (Green Team)
 # Second Half - Attack (Green Team)
