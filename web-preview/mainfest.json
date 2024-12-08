@@ -1,0 +1,8 @@
+{
+    "description": "This is a Valorant OCR API connected to a web server for custom HUD display used in streaming. Developed mainly for a better tournament (with high quality streaming) for <a href="https://twitch.tv/terraficgaming" target="_blank">Terrafic Gaming</a>.,
+    "href": "Repository",
+    "image": "https://raw.githubusercontent.com/thisismudith/Valorant_OCR_API/main/web-preview/preview.png",
+    "link": "https://github.com/thisismudith/Valorant_OCR_API/",
+    "languages": ["HTML", "CSS", "Javascript", "Python", "Web Sockets"],
+    "status": true
+}
